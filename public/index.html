@@ -34,6 +34,20 @@
             usersList.innerHTML = users.map(user => `<li>${user}</li>`).join(" ");
         })
 
+
+        messageForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const extractMessageText = messageInput.value.trim(); 
+
+            if(extractMessageText) {
+                socket.emit('chatMessage', {
+                    userName, 
+                    text: extractMessageText
+                }); 
+                messageInput.value = "";
+            }
+        })
+
         function addMessage(input) {
             const messageElement = document.createElement('div'); 
             messageElement.textContent = input; 
