@@ -26,7 +26,10 @@ io.on("connection", (socket) => {
         io.emit('userList', Array.from(users));
     });
     //handle incoming chat message
-
+    socket.on('chatMessage', (message) => {
+        //broadcast the message to all the connected clients.
+        io.emit('chatMessage', message);
+    });
     //handle user disconnection
 })
 
