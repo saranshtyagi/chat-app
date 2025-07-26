@@ -30,9 +30,13 @@
             addMessage(`${user} has joined the chat`);
         });
 
+        socket.on('userLeft', (user) => {
+            addMessage(`${user} has left the chat`);
+        });
+
         socket.on('userList', (users) => {
             usersList.innerHTML = users.map(user => `<li>${user}</li>`).join(" ");
-        })
+        });
 
         //Listen for chatMessage events from the server
         socket.on('chatMessage', (message) => {
