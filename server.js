@@ -31,6 +31,16 @@ io.on("connection", (socket) => {
         io.emit('chatMessage', message);
     });
     //handle user disconnection
+    socket.on("disconnect", () => {
+        console.log('A user got disconnected!'); 
+        users.forEach(user => {
+            if(user === socket.userName) {
+                users.delete(user);
+                io.emit('userLeft', user);
+                io.emit('userList', Array.from(users));
+            }
+        });
+    })
 })
 
 server.listen(3000, () => {
