@@ -18,6 +18,7 @@ io.on("connection", (socket) => {
     //handle users when they join chat 
     socket.on('join', (userName) => {
         users.add(userName);
+        socket.userName = userName;
 
         //broadcast to all users that a new user has joined
         io.emit('userJoined', userName);
