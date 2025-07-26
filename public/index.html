@@ -34,6 +34,11 @@
             usersList.innerHTML = users.map(user => `<li>${user}</li>`).join(" ");
         })
 
+        //Listen for chatMessage events from the server
+        socket.on('chatMessage', (message) => {
+            addMessage(`${message.userName}: ${message.text}`)
+        });
+
 
         messageForm.addEventListener('submit', (event) => {
             event.preventDefault();
